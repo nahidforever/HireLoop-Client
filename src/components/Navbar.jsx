@@ -60,7 +60,7 @@ export default function Navbar() {
             {/* Auth Links */}
             <div className="flex items-center gap-4">
               <Link
-                href="/login"
+                href="/auth/signin"
                 className="text-sm font-medium text-violet-400 transition hover:text-violet-300"
               >
                 Sign In
@@ -141,7 +141,7 @@ export default function Navbar() {
             <div className="border-t border-white/10 pt-4">
               <div className="flex flex-col gap-3">
                 <Link
-                  href="/login"
+                  href="/auth/signin"
                   className="rounded-xl px-4 py-3 text-base font-medium text-violet-400 transition hover:bg-white/5"
                   onClick={() => setIsMenuOpen(false)}
                 >
