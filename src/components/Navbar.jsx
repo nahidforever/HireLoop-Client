@@ -3,9 +3,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@heroui/react";
+import { useSession, signOut } from "@/lib/auth-client";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { data: session, isPending } = useSession();
+  // console.log("Session data in Navbar:", session, "Is pending:", isPending);
+  const user = session?.user;
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
 
   const navLinks = [
     {
@@ -59,12 +67,21 @@ export default function Navbar() {
 
             {/* Auth Links */}
             <div className="flex items-center gap-4">
-              <Link
-                href="/auth/signin"
-                className="text-sm font-medium text-violet-400 transition hover:text-violet-300"
-              >
-                Sign In
-              </Link>
+              {user ? (
+                <>
+                  Hi, {user.name}!
+                  <Button onClick={handleSignOut} variant="ghost">
+                    Sign Out
+                  </Button>
+                </>
+              ) : (
+                <Link
+                  href="/auth/signin"
+                  className="text-sm font-medium text-violet-400 transition hover:text-violet-300"
+                >
+                  Sign In
+                </Link>
+              )}
 
               <Button
                 as={Link}
@@ -139,20 +156,28 @@ export default function Navbar() {
 
             {/* Divider */}
             <div className="border-t border-white/10 pt-4">
-              <div className="flex flex-col gap-3">
-                <Link
-                  href="/auth/signin"
-                  className="rounded-xl px-4 py-3 text-base font-medium text-violet-400 transition hover:bg-white/5"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Sign In
-                </Link>
+              <div className="flex items-center gap-4">
+                {user ? (
+                  <>
+                    Hi, {user.name}!
+                    <Button onClick={handleSignOut} variant="ghost">
+                      Sign Out
+                    </Button>
+                  </>
+                ) : (
+                  <Link
+                    href="/auth/signin"
+                    className="text-sm font-medium text-violet-400 transition hover:text-violet-300"
+                  >
+                    Sign In
+                  </Link>
+                )}
 
                 <Button
                   as={Link}
                   href="/register"
-                  className="bg-white font-semibold text-black"
                   radius="lg"
+                  className="h-11 bg-white px-6 text-sm font-semibold text-black hover:bg-gray-200"
                 >
                   Get Started
                 </Button>

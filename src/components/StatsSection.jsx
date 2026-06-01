@@ -1,5 +1,7 @@
-import { Briefcase, Factory, Magnifier, Star } from "@gravity-ui/icons";
+"use client";
 
+import { Briefcase, Factory, Magnifier, Star } from "@gravity-ui/icons";
+import { motion } from "motion/react";
 export default function StatsSection() {
   const stats = [
     {
@@ -48,11 +50,15 @@ export default function StatsSection() {
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         {/* Heading */}
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-2xl font-medium leading-relaxed text-white/90 md:text-3xl">
+          <h2 className="text-2xl font-medium leading-relaxed text-white/90">
             Assisting over 15,000 job seekers
             <br />
             find their dream positions.
           </h2>
+          <motion.p animate={{ rotate: -45 }}>Remote Jobs</motion.p>
+          <motion.p initial={{ scale: 0 }} animate={{ scale: 1 }}>
+            On-site Jobs
+          </motion.p>
         </div>
 
         {/* Stats Cards */}
