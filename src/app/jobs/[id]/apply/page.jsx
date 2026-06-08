@@ -5,6 +5,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
 import JobApply from "./JobApply";
+import { getApplicationsByApplicant } from "@/lib/api/applications";
 
 const ApplyJob = async ({ params }) => {
   const { id } = await params;
@@ -39,11 +40,14 @@ const ApplyJob = async ({ params }) => {
     );
   }
 
+  const applications = await getApplicationsByApplicant(user.id);
+
   const job = await getJobById(id);
 
   return (
     <div>
-      <JobApply applicant={user} job={job}></JobApply>
+      <h2>You have applied so far: {applications.length} out of 3</h2>
+      {<JobApply applicant={user} job={job}></JobApply>}
     </div>
   );
 };
