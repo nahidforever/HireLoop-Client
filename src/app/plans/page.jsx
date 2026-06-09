@@ -27,6 +27,7 @@ const PricingPage = () => {
   const seekerPlans = [
     {
       name: "Free",
+      id: "seeker_free",
       price: "$0",
       period: "/forever",
       description:
@@ -43,6 +44,7 @@ const PricingPage = () => {
     },
     {
       name: "Pro",
+      id: "seeker_pro",
       price: "$19",
       period: "/month",
       description:
@@ -59,6 +61,7 @@ const PricingPage = () => {
     },
     {
       name: "Premium",
+      id: "seeker_premium",
       price: "$39",
       period: "/month",
       description:
@@ -78,6 +81,7 @@ const PricingPage = () => {
   const recruiterPlans = [
     {
       name: "Free",
+      id: "recruiter_free",
       price: "$0",
       period: "/forever",
       description:
@@ -94,6 +98,7 @@ const PricingPage = () => {
     },
     {
       name: "Growth",
+      id: "recruiter_growth",
       price: "$49",
       period: "/month",
       description:
@@ -110,6 +115,7 @@ const PricingPage = () => {
     },
     {
       name: "Enterprise",
+      id: "recruiter_enterprise",
       price: "$149",
       period: "/month",
       description:
@@ -262,6 +268,7 @@ const PricingPage = () => {
               {/* Plan Action CTA Callout Anchor Point */}
               <div className="mt-8">
                 <form action="/api/checkout_sessions" method="POST">
+                  <input type="hidden" name="plan_id" value={plan.id} />
                   <section>
                     <button
                       type="submit"
